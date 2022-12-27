@@ -1,3 +1,4 @@
+
 <%
 	session.removeAttribute("s");
 	session.invalidate();

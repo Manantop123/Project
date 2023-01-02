@@ -72,6 +72,8 @@ public class signupdao {
 				s1.setFname(rs.getString("fname"));
 				s1.setLname(rs.getString("lname"));
 				s1.setEmail(rs.getString("email"));
+				s1.setPassword(rs.getString("password"));
+				s1.setCpassword(rs.getString("cpassword"));
 				s1.setGender(rs.getString("gender"));
 				s1.setAddress(rs.getString("address"));
 			}
@@ -81,5 +83,21 @@ public class signupdao {
 			e2.printStackTrace();
 		}
 		return s1;
+	}
+	public static void updatepsw(String email , String psw)
+	{
+		try
+		{
+			Connection conn = dbutil.createConnection();
+			String sql = "update signup set password=? where email=?";
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, psw);
+			pst.setString(2, email);
+			pst.executeUpdate();
+		}
+		catch(Exception e2)
+		{
+			e2.printStackTrace();
+		}
 	}
 }

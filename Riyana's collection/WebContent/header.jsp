@@ -46,14 +46,7 @@
 							<li class="nav-item active"><a class="nav-link"
 								href="index.jsp">Home <span class="sr-only">(current)</span></a>
 							</li>
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="true"> <span
-									class="nav-label">Pages <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="about.jsp">About</a></li>
-									<li><a href="testimonial.jsp">Testimonial</a></li>
-								</ul></li>
+
 							<li class="nav-item"><a class="nav-link" href="product.jsp">Products</a>
 							</li>
 							<li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a>
@@ -68,9 +61,8 @@
 									{
 										s1 = (signup)session.getAttribute("s");	
 							%>
-
-
-							<li class="nav-item"><a class="nav-link" href="logout.jsp">logout</a>
+						    <li class="nav-item"><a class="nav-link" href="changepsw.jsp">changepsw</a>							</li>
+							<li class="nav-item"><a class="nav-link" href="logout.jsp">logout<br>Welcome,<%=s1.getFname() %></a>
 							</li>
 
 							<% 

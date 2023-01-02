@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.bean.signup;
 import com.dao.signupdao;
@@ -53,6 +54,30 @@ public class signupcontroller extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("s", s);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+		}
+		else if(action.equalsIgnoreCase("psw"))
+		{
+			HttpSession session = request.getSession();
+			signup s = (signup)session.getAttribute("s");
+			
+			if(s.getPassword().equals(request.getParameter("oldpsw")))
+			{
+				if(request.getParameter("newpsw").equals(request.getParameter("cnewpsw")))
+				{
+					signupdao.updatepsw(s.getEmail(), request.getParameter("newpsw"));
+					response.sendRedirect("logout.jsp");
+				}
+				else
+				{
+					request.setAttribute("msg", "newpsw/cnewpsw doesnot match");
+					request.getRequestDispatcher("changepsw.jsp").forward(request, response);
+				}
+			}
+			else
+			{
+				request.setAttribute("msg", "old password not matched");
+				request.getRequestDispatcher("changepsw.jsp").forward(request, response);
 			}
 		}
 	}

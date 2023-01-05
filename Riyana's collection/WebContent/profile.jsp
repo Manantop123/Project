@@ -32,35 +32,14 @@
             <div class="row">
                <div class="col-lg-8 offset-lg-2">
                   <div class="full">
-                     <form name="signup" method="post" action="signupcontroller">
+                     <form name="updateform" method="post" action="signupcontroller">
                         <fieldset>
-                          <table>
-                           <tr>
-                           <td>
-                           <input type="radio" name="usertype" value="user">user
-                           </td>
-                           <td>
-                           <input type="radio" name="usertype" value="seller">seller
- 						   </td>
- 						   </tr>
- 						   </table>
-                           <input type="text" placeholder="Enter your full name" name="fname" required />
-                           <input type="text" placeholder="Enter your lst name" name="lname" required />
-                           <input type="email" placeholder="Enter your email address" name="email" required />
-                           <table>
-                           <tr>
-                           <td>
-                           <input type="radio" name="gender" value="male">Male
-                           </td>
-                           <td>
-                           <input type="radio" name="gender" value="female">Female
- 						   </td>
- 						   </tr>
- 						   </table>
- 						   <input type="password" placeholder="Enter your password" name="password" required />
-                           <input type="password" placeholder="Enter confirm password" name="cpassword" required />
-                           <textarea placeholder="Enter your address" name ="address" required></textarea>
-                           <input type="submit" value="Submit" name="action" />
+					      <input type="hidden" placeholder="id" name="uid" value="<%=s1.getUid()%>"required />    
+                           <input type="text" placeholder="Enter your full name" name="fname" value="<%=s1.getFname() %>"required />
+                           <input type="text" placeholder="Enter your lst name" name="lname" value="<%=s1.getLname() %>" required />
+                           <input type="email" placeholder="Enter your email address" name="email" value="<%=s1.getEmail() %>" readonly/>
+                           <textarea placeholder="Enter your address" name ="address"  required><%=s1.getAddress() %></textarea>
+                           <input type="submit" value="update" name="action" />
                         </fieldset>
                      </form>
                   </div>

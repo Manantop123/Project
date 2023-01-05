@@ -2,7 +2,7 @@ package com.bean;
 
 public class signup {
 	int uid;
-	String fname,lname,email,gender,password,cpassword,address;
+	String fname,lname,email,gender,password,cpassword,address,usertype;
 	public int getUid() {
 		return uid;
 	}
@@ -50,6 +50,12 @@ public class signup {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getUsertype() {
+		return usertype;
+	}
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
 	}
 	
 	

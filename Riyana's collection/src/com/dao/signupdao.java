@@ -15,7 +15,7 @@ public class signupdao {
 		try
 		{
 			Connection conn = dbutil.createConnection();
-			String sql = "insert into signup(fname,lname,email,gender,password,cpassword,address) values(?,?,?,?,?,?,?)";
+			String sql = "insert into signup(fname,lname,email,gender,password,cpassword,address,usertype) values(?,?,?,?,?,?,?,?)";
 			PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setString(1, s1.getFname());
 			pst.setString(2, s1.getLname());
@@ -24,6 +24,7 @@ public class signupdao {
 			pst.setString(5, s1.getPassword());
 			pst.setString(6, s1.getCpassword());
 			pst.setString(7, s1.getAddress());
+			pst.setString(8, s1.getUsertype());
 			pst.executeUpdate();
 		}
 		catch(Exception e2)
@@ -76,6 +77,7 @@ public class signupdao {
 				s1.setCpassword(rs.getString("cpassword"));
 				s1.setGender(rs.getString("gender"));
 				s1.setAddress(rs.getString("address"));
+				s1.setUsertype(rs.getString("usertype"));
 			}
 		}
 		catch(Exception e2)
@@ -93,6 +95,24 @@ public class signupdao {
 			PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setString(1, psw);
 			pst.setString(2, email);
+			pst.executeUpdate();
+		}
+		catch(Exception e2)
+		{
+			e2.printStackTrace();
+		}
+	}
+	public static void updateform(signup s1)
+	{
+		try
+		{
+			Connection conn = dbutil.createConnection();
+			String sql ="update signup set fname=?,lname=?,address=? where email=?";		
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, s1.getFname());
+			pst.setString(2, s1.getLname());
+			pst.setString(3, s1.getAddress());
+			pst.setString(4, s1.getEmail());
 			pst.executeUpdate();
 		}
 		catch(Exception e2)

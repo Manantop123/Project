@@ -14,5 +14,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Gopal/Downloads/mysql-connector-java-5.1.25.jar"/>
+	<classpathentry kind="lib" path="E:/Java/forgot_password-20220915T122359Z-001/forgot_password/javax.activation.jar"/>
+	<classpathentry kind="lib" path="E:/Java/forgot_password-20220915T122359Z-001/forgot_password/javax.mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

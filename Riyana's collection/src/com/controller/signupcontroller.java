@@ -11,6 +11,7 @@ import javax.websocket.Session;
 
 import com.bean.signup;
 import com.dao.signupdao;
+import com.service.Services;
 
 /**
  * Servlet implementation class signupcontroller
@@ -31,6 +32,7 @@ public class signupcontroller extends HttpServlet {
 				request.getRequestDispatcher("signup.jsp").forward(request, response);
 			} else if (request.getParameter("password").equals(request.getParameter("cpassword"))) {
 				signup s1 = new signup();
+				s1.setUsertype(request.getParameter("usertype"));
 				s1.setFname(request.getParameter("fname"));
 				s1.setLname(request.getParameter("lname"));
 				s1.setEmail(request.getParameter("email"));
@@ -80,6 +82,77 @@ public class signupcontroller extends HttpServlet {
 				request.getRequestDispatcher("changepsw.jsp").forward(request, response);
 			}
 		}
-	}
+		else if(action.equalsIgnoreCase("update"))
+		{
+			signup s1 = new signup();
+			s1.setUid(Integer.parseInt(request.getParameter("uid")));
+			s1.setFname(request.getParameter("fname"));
+			s1.setLname(request.getParameter("lname"));
+			s1.setEmail(request.getParameter("email"));
+			s1.setAddress(request.getParameter("address"));
+			signupdao.updateform(s1);
+			HttpSession session = request.getSession();
+			session.setAttribute("s1", s1);
+			response.sendRedirect("login.jsp");
+		}
+		else if(action.equalsIgnoreCase("sendotp"))
+		{
+			String email = request.getParameter("email");
+			boolean flag = signupdao.selectemail(email);
+			if(flag==true)
+			{
+				int min = 1000;
+				int max = 9999;
+				int  otp= (int)Math.floor(Math.random() * (max - min + 1) + min);
+				Services.sendMail(email, otp);
+				request.setAttribute("email",email);
+				request.setAttribute("otp", otp);
+				request.setAttribute("msg", "otp send successfully");
+				request.getRequestDispatcher("otp.jsp").forward(request,response);
 
+			}
+			else
+			{
+				request.setAttribute("msg", "email-id is not register");
+				request.getRequestDispatcher("forgotpsw.jsp").forward(request, response);
+			}
+		}
+		else if(action.equalsIgnoreCase("verifyotp"))
+		{
+			String email = request.getParameter("email");
+			int otp1 = Integer.parseInt(request.getParameter("otp1"));
+			int otp2 = Integer.parseInt(request.getParameter("otp2"));
+			
+			if(otp1==otp2)
+			{
+				request.setAttribute("email", email);
+				request.getRequestDispatcher("updatepsw.jsp").forward(request, response);
+			}
+			else
+			{
+				request.setAttribute("email", email);
+				request.setAttribute("otp", otp1);
+				request.setAttribute("msg", "invalid otp");
+				request.getRequestDispatcher("otp.jsp").forward(request, response);
+			}
+		}
+		else if(action.equalsIgnoreCase("updatepsw"))
+		{
+			String email = request.getParameter("email");
+			String np = request.getParameter("newpsw");
+			String cnp = request.getParameter("cnewpsw");
+			
+			if(np.equals(cnp))
+			{
+				signupdao.updatepsw(email, np);
+				response.sendRedirect("login.jsp");
+			}
+			else
+			{
+				request.setAttribute("email", email);
+				request.setAttribute("msg", "new psw / cpsw doesnot match");
+				request.getRequestDispatcher("updatepsw.jsp").forward(request, response);
+			}
+		}
+	}
 }

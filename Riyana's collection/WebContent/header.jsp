@@ -61,8 +61,10 @@
 									{
 										s1 = (signup)session.getAttribute("s");	
 							%>
-						    <li class="nav-item"><a class="nav-link" href="changepsw.jsp">changepsw</a>							</li>
+						    <li class="nav-item"><a class="nav-link" href="profile.jsp">profile</a></li>
+							<li class="nav-item"><a class="nav-link" href="profile.jsp">changepsw</a></li>
 							<li class="nav-item"><a class="nav-link" href="logout.jsp">logout<br>Welcome,<%=s1.getFname() %></a>
+							
 							</li>
 
 							<% 

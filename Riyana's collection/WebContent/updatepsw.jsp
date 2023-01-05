@@ -32,17 +32,12 @@
 		<div class="row">
 			<div class="col-lg-8 offset-lg-2">
 				<div class="full">
-					<form name="login" method="post" action="signupcontroller">
+					<form name="updatepswform" method="post" action="signupcontroller">
 						<fieldset>
-							<input type="email" placeholder="Enter your email address"
-								name="email" required /> <input type="password"
-								placeholder="Enter your password" name="password" required /> 
-								<table>
-								<tr>
-								<td><input type="submit" value="Login" name="action" /></td>
-								<td><a href = "forgotpsw.jsp">forgot password</a></td>
-								</tr>
-								</table>
+							<input type="hidden" name="email" value="<%=request.getParameter("email") %>">
+							<input type="password" placeholder="Enter your password" name="newpsw" required />
+							<input type="password" placeholder="Enter your password" name="cnewpsw" required /> 
+							<input type="submit" value="updatepsw" name="action" />
 						</fieldset>
 					</form>
 				</div>

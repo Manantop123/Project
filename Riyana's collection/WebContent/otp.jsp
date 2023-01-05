@@ -9,7 +9,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="full">
-					<h3>Login</h3>
+					<h3>verify otp</h3>
 				</div>
 			</div>
 		</div>
@@ -32,17 +32,12 @@
 		<div class="row">
 			<div class="col-lg-8 offset-lg-2">
 				<div class="full">
-					<form name="login" method="post" action="signupcontroller">
+					<form name="forgotform" method="post" action="signupcontroller">
 						<fieldset>
-							<input type="email" placeholder="Enter your email address"
-								name="email" required /> <input type="password"
-								placeholder="Enter your password" name="password" required /> 
-								<table>
-								<tr>
-								<td><input type="submit" value="Login" name="action" /></td>
-								<td><a href = "forgotpsw.jsp">forgot password</a></td>
-								</tr>
-								</table>
+						<input type ="hidden" name= "email" value="<%=request.getAttribute("email") %>">
+						<input type ="hidden" name= "otp1" value="<%=request.getAttribute("otp") %>">					
+							<input type="text" placeholder="Enter verigy otp" name="otp2" required /> 
+							<input type="submit" value="verifyotp" name="action" />
 						</fieldset>
 					</form>
 				</div>

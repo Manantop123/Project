@@ -1,15 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@include file ="header.jsp" %>
 <!DOCTYPE html>
 <html>
    <head>
+      <!-- Basic -->
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <!-- Mobile Metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <!-- Site Metas -->
+      <meta name="keywords" content="" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <link rel="shortcut icon" href="images/favicon.png" type="">
+      <title>Famms - Fashion HTML Template</title>
+      <!-- bootstrap core css -->
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+      <!-- font awesome style -->
+      <link href="css/font-awesome.min.css" rel="stylesheet" />
+      <!-- Custom styles for this template -->
+      <link href="css/style.css" rel="stylesheet" />
+      <!-- responsive style -->
+      <link href="css/responsive.css" rel="stylesheet" />
+   </head>
+   <body class="sub_page">
+      <div class="hero_area">
+               </div>
+      <!-- inner page section -->
       <section class="inner_page_head">
          <div class="container_fuild">
             <div class="row">
                <div class="col-md-12">
                   <div class="full">
-                     <h3>Contact us</h3>
+                     <h3>sign up</h3>
                   </div>
                </div>
             </div>
@@ -19,26 +42,42 @@
       <!-- why section -->
       <section class="why_section layout_padding">
          <div class="container">
-         
-         
-         <%
-         
-         	if(request.getAttribute("msg")!=null)
-         	{
-         		out.print(request.getAttribute("msg"));
-         	}
-         %>
-         
+         	<%
+         		if(request.getAttribute("msg")!=null)
+         		{
+         			out.print(request.getAttribute("msg"));
+         		}
+         	%>
             <div class="row">
                <div class="col-lg-8 offset-lg-2">
                   <div class="full">
-                     <form name="contact" method="post" action="contactcontroller">
+                     <form name="signupform" method="post" action="usercontroller">
                         <fieldset>
+                           <table>
+                           <tr>
+                           <td>
+                           <input type="radio"  name="usertype" value="seller" required />seller
+                           </td>
+                           <td>
+                           <input type="radio"  name="usertype" value="user" required />user
+                           </td>
+                           </tr>
+                           </table>
                            <input type="text" placeholder="Enter your full name" name="fname" required />
-                           <input type="email" placeholder="Enter your email address" name="email" required />
-                           <input type="text" placeholder="Enter subject" name="subject" required />
-                           <textarea placeholder="Enter your message" name ="msg" required></textarea>
-                           <input type="submit" value="submit" name="action" />
+                           <input type="text" placeholder="Enter your email address" name="email" required />
+                           <table>
+                           <tr>
+                           <td>
+                           <input type="radio" placeholder="Enter gender" name="gender" value="male" required />male
+                           </td>
+                           <td>
+                           <input type="radio" placeholder="Enter gender" name="gender" value="female" required />female
+                           </td>
+                           </tr>
+                           </table>
+                           <input type="password" placeholder="Enter password" name="psw" required />
+                           <input type="password" placeholder="Enter cpassword" name="cpsw" required />
+                           <input type="submit" value="signup"  name="action"/>
                         </fieldset>
                      </form>
                   </div>

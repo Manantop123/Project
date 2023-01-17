@@ -35,6 +35,7 @@
                      <form name="updateform" method="post" action="signupcontroller">
                         <fieldset>
 					      <input type="hidden" placeholder="id" name="uid" value="<%=s1.getUid()%>"required />    
+					      <input type="hidden"  name="usertype" value="<%=s1.getUsertype()%>"> 
                            <input type="text" placeholder="Enter your full name" name="fname" value="<%=s1.getFname() %>"required />
                            <input type="text" placeholder="Enter your lst name" name="lname" value="<%=s1.getLname() %>" required />
                            <input type="email" placeholder="Enter your email address" name="email" value="<%=s1.getEmail() %>" readonly/>

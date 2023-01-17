@@ -53,9 +53,20 @@ public class signupcontroller extends HttpServlet {
 				request.setAttribute("msg", "login email/password doesnot match");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			} else {
-				HttpSession session = request.getSession();
-				session.setAttribute("s", s);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				
+				if(s.getUsertype().equals("user"))
+				{
+					HttpSession session = request.getSession();
+					session.setAttribute("s", s);
+					request.getRequestDispatcher("index.jsp").forward(request, response);	
+				}
+				else
+				{
+					HttpSession session = request.getSession();
+					session.setAttribute("s", s);
+					request.getRequestDispatcher("seller_index.jsp").forward(request, response);
+				}
+
 			}
 		}
 		else if(action.equalsIgnoreCase("psw"))
@@ -72,8 +83,17 @@ public class signupcontroller extends HttpServlet {
 				}
 				else
 				{
-					request.setAttribute("msg", "newpsw/cnewpsw doesnot match");
-					request.getRequestDispatcher("changepsw.jsp").forward(request, response);
+					if(s.getUsertype().equals("user"))
+					{
+						request.setAttribute("msg", "newpsw/cnewpsw doesnot match");
+						request.getRequestDispatcher("changepsw.jsp").forward(request, response);	
+					}
+					else
+					{
+						request.setAttribute("msg", "newpsw/cnewpsw doesnot match");
+						request.getRequestDispatcher("seller_changepsw.jsp").forward(request, response);
+					}
+
 				}
 			}
 			else
@@ -91,9 +111,12 @@ public class signupcontroller extends HttpServlet {
 			s1.setEmail(request.getParameter("email"));
 			s1.setAddress(request.getParameter("address"));
 			signupdao.updateform(s1);
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("s1", s1);
-			response.sendRedirect("login.jsp");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+			
+
 		}
 		else if(action.equalsIgnoreCase("sendotp"))
 		{

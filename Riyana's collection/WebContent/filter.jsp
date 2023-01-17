@@ -30,7 +30,8 @@
             </div>
             <div class="row">
             	<%
-            		List<product> list = productdao.getallproduct();
+            	String pc = request.getParameter("category");
+            		List<product> list = productdao.getbyproductcategory(pc);
             		for(product p : list)
             		{
             	%>		

@@ -1,3 +1,5 @@
+<%@page import="com.dao.cartdao"%>
+<%@page import="com.dao.wishlidtdao"%>
 <%@page import="com.dao.productdao"%>
 <%@page import="com.bean.product"%>
 <%@page import="java.util.List"%>
@@ -28,20 +30,29 @@
                      <div class="option_container">
                         <div class="options">
                   <%
+
+                    
                   	if(session.getAttribute("s")!=null)
                   	{
-                  %>
+                        boolean flag = wishlidtdao.checkwishlist(s1.getUid(), p.getPid());
+                  		if(flag==false)
+                  		{
+                  	%>		
 
-                           <a href="addtocart.jsp?pid=<%=p.getPid()%>" class="option1">
-                           add to cart
+                            <a href="addtowishlist.jsp?pid=<%=p.getPid()%>&uid=<%=s1.getUid()%>" class="option2">
+                            add to wishlist
+                            </a>
+                  	<% 	
+                  		}
+                  		else
+                  		{
+                  	%>		
+                           <a href="removefromwishlist.jsp?pid=<%=p.getPid()%>&uid=<%=s1.getUid()%>" class="option2">
+                             remove from wishlist
                            </a>
-                           <a href="addtowishlist.jsp?pid=<%=p.getPid()%>" class="option2">
-                           add to wishlist
-                           </a>
-     
-                    
-                  		
                   <%		
+                  		}
+                  		
                   	}
                   	else
                   	{
@@ -55,6 +66,45 @@
                   	}
                   %>
                    </div>
+                       <div class="options">
+                  <%
+
+                    
+                  	if(session.getAttribute("s")!=null)
+                  	{
+                        boolean flag = cartdao.checkcartlist(s1.getUid(), p.getPid());
+                  		if(flag==false)
+                  		{
+                  	%>		
+
+                            <a href="addtocart.jsp?pid=<%=p.getPid()%>&uid=<%=s1.getUid()%>" class="option2">
+                            add to cart
+                            </a>
+                  	<% 	
+                  		}
+                  		else
+                  		{
+                  	%>		
+                           <a href="removefromcart.jsp?pid=<%=p.getPid()%>&uid=<%=s1.getUid()%>" class="option2">
+                             remove from cart
+                           </a>
+                  <%		
+                  		}
+                  		
+                  	}
+                  	else
+                  	{
+                  %>
+                         <a href="login.jsp" class="option2">
+                          login
+                          </a>
+                  
+                  	
+                  <%		
+                  	}
+                  %>
+                   </div>
+                   
                      </div>
                      <div class="img-box">
                         <img src="Product_Images/<%=p.getImage() %>" alt="">

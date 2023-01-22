@@ -14,7 +14,7 @@
 	c.setUid(uid);
 	c.setProductqty(1);
 	c.setProductprice(p.getPrice());
-	c.setProducttprice(p.getPrice());
+	c.setTotalprice(p.getPrice());
 	cartdao.addcart(c);
 	response.sendRedirect("mycart.jsp");
 %>

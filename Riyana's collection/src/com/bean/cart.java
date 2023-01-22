@@ -1,7 +1,7 @@
 package com.bean;
 
 public class cart {
-	int cid,pid,uid,productqty,productprice,producttprice;
+	int cid,pid,uid,productqty,productprice,totalprice;
 
 	public int getCid() {
 		return cid;
@@ -42,13 +42,12 @@ public class cart {
 	public void setProductprice(int productprice) {
 		this.productprice = productprice;
 	}
-
-	public int getProducttprice() {
-		return producttprice;
+	public int getTotalprice() {
+		return totalprice;
 	}
 
-	public void setProducttprice(int producttprice) {
-		this.producttprice = producttprice;
+	public void setTotalprice(int totalprice) {
+		this.totalprice = totalprice;
 	}
 	
 }

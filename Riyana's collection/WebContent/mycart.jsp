@@ -1,3 +1,4 @@
+<%@page import="java.util.Random"%>
 <%@page import="com.dao.cartdao"%>
 <%@page import="com.bean.cart"%>
 <%@page import="com.dao.wishlidtdao"%>
@@ -8,6 +9,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@include file ="header.jsp" %>
+<%
+ 	Random randomGenerator = new Random();
+	int randomInt = randomGenerator.nextInt(1000000);
+ %>
 <!DOCTYPE html>
 <html>
    <head>
@@ -34,46 +39,109 @@
             </div>
             <div class="row">
             	<%
+            		int netprice = 0;
             		List<cart> list = cartdao.getbyproductbyid(s1.getUid());
             		for(cart c : list)
             		{
+            			
+            			netprice = netprice+c.getTotalprice();
             			product p = productdao.selectproduct(c.getPid());
             	%>		
             	
-               <div class="col-sm-6 col-md-4 col-lg-4">
+               <div class="col-sm-6 col-md-6 col-lg-10">
                   <div class="box">
-                     <div class="option_container">
-                        <div class="options">
-                           <a href="user_product_detail.jsp?pid=<%=p.getPid() %>" class="option2">
-                           Product Details
-                           </a>
-                        </div>
-                     </div>
+                        
+                     
                      <div class="img-box">
                         <img src="Product_Images/<%=p.getImage() %>" alt="">
                      </div>
                      <div class="detail-box">
-                        <h5>
-                           <%=p.getImage() %>
-                        </h5>
+                       
                         <h6>
-                           <%=p.getModel() %>
+                           <u>Address</u> <%=p.getAddress() %>
                         </h6>
                          <h5>
-                           <%=p.getCategory() %>
+                           <u>Brand</u> <%=p.getModel() %>
                         </h5>
                         <h6>
-                           Rs.<%=p.getPrice() %>
+                           <p style="color:red">Price Rs.<%=c.getTotalprice() %></p>
                         </h6>
+						
+						 <h5>
+                           Gender <%=s1.getGender() %>
+                        </h5>                        
+ 				</div>                      
                      </div>
+                     <div class="detail-box">
+                       <form name="cartform" method="post" action="cartcontroller">
+                       <input type="hidden" name="cid" value="<%=c.getCid() %>">
+                        <h6>
+                           Quantity 
+                           <input type="number" min="1" max="10" value="<%=c.getProductqty() %>" name="product_qty" onchange="this.form.submit()">
+                        </h6>
+                        </form>
+                         <h5>
+                           Total Price <p style="color:red">Rs.<%=c.getTotalprice() %></p>
+                        </h5>                 
+      				
                   </div>
                </div>
                <% 
                }
             	%>
-               <div class="col-sm-6 col-md-4 col-lg-4">
+            	<form method="post" action="pgRedirect.jsp">
+		<table border="1">
+			<tbody>
+				<tr>
+					<th>S.No</th>
+					<th>Label</th>
+					<th>Value</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td><label>ORDER_ID::*</label></td>
+					<td><input id="ORDER_ID" tabindex="1" maxlength="20" size="20"
+						name="ORDER_ID" autocomplete="off"
+						value="ORDS_<%= randomInt %>">
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td><label>CUSTID ::*</label></td>
+					<td><input id="CUST_ID" tabindex="2" maxlength="30" size="12" name="CUST_ID" autocomplete="off" value="CUST001"></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td><label>INDUSTRY_TYPE_ID ::*</label></td>
+					<td><input id="INDUSTRY_TYPE_ID" tabindex="4" maxlength="12" size="12" name="INDUSTRY_TYPE_ID" autocomplete="off" value="Retail"></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td><label>Channel ::*</label></td>
+					<td><input id="CHANNEL_ID" tabindex="4" maxlength="12"
+						size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
+					</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td><label>txnAmount*</label></td>
+					<td><input title="TXN_AMOUNT" tabindex="10"
+						type="text" name="TXN_AMOUNT"
+						value=Rs.<%=netprice %>>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td><input value="CheckOut" type="submit"	onclick=""></td>
+				</tr>
+			</tbody>
+		</table>
+		* - Mandatory Fields
+	</form>
                  </div>
                   </div>
+                  </section>
   <!-- footer section -->
       <footer class="footer_section">
          <div class="container">

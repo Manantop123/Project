@@ -14,7 +14,7 @@ public class Services {
 
 	public static void sendMail(String emailid,int otp){
 		final String username  = "soni.manan315@gmail.com";
-		final String password   = "hmeuulxsgaqrmqcs";
+		final String password   = "sbdvnvwkribbaaph";
 		
  
 		Properties props = new Properties();

@@ -9,7 +9,7 @@ interface I2
 {
 	void display();
 }
-public class interfaces implements I1{
+public class interfaces implements I1,I2{
 	public void show()
 	{
 		System.out.println("1");

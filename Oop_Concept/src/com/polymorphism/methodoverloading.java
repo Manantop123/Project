@@ -32,13 +32,13 @@ public class methodoverloading {
 	{
 		System.out.println("old");
 	}
-	void show(String a,String b)
+	void show(String a, String b)
 	{
 		System.out.println("new");
 	}
 	public static void main(String[] args) {
 		methodoverloading m1 = new methodoverloading();
 		m1.show("manan");
-		m1.show("manan","soni");
+		m1.show("manan","so");
 	}
 }
